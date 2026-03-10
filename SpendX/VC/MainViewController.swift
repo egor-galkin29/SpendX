@@ -14,9 +14,7 @@ final class MainViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.setText("Account name",
-                      font: UIFont(name: "IBMPlexSans-Bold", size: 24)!,
-                      letterSpacingPrecent: -3)
+        label.attributedText = AttributedTextBuilder.make("Account name", font: FontBook.bold(size: 24), color: .black, kern: -1)
         return label
     }()
         
@@ -32,8 +30,7 @@ final class MainViewController: UIViewController {
     
     private let amountLabel: UILabel = {
         let label = UILabel()
-        label.setText("18 598 $", font: UIFont(name: "IBMPlexSans-SemiBold", size: 32)!, letterSpacingPrecent: -3)
-        label.textColor = .black
+        label.attributedText = AttributedTextBuilder.make("18 567 $", font: FontBook.semiBold(size: 32), color: .black, kern: -1)
         return label
     }()
    
@@ -49,8 +46,7 @@ final class MainViewController: UIViewController {
     
     private let spendingsLabel: UILabel = {
         let label = UILabel()
-        label.setText("Spendings", font: UIFont(name: "IBMPlexSans-Regular", size: 14)!, letterSpacingPrecent: -3)
-        label.textColor = .black
+        label.attributedText = AttributedTextBuilder.make("Spendings", font: FontBook.regular(size: 14), color: .black, kern: Int(-0.5))
         return label
     }()
     

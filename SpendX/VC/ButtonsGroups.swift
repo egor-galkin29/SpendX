@@ -21,10 +21,12 @@ struct PeriodButtons {
         
         config.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 20, bottom: 4, trailing: 20)
         
-        var attributedTitle = AttributedString(title)
-        attributedTitle.font = UIFont(name: "IBMPlexSans-Medium", size: 14)
-        attributedTitle.foregroundColor = .black
-        config.attributedTitle = attributedTitle
+        let ns = AttributedTextBuilder.make(title,
+                                            font: FontBook.medium(size: 14),
+                                            color: .black,
+                                            kern: 0)
+        let swiftAttr = AttributedString(ns)
+        config.attributedTitle = swiftAttr
         
         let button = UIButton(configuration: config)
         return button
@@ -78,11 +80,13 @@ struct FilterButtons {
     private static func makeUIButtonFilter(_ title: String) -> UIButton {
         var config = UIButton.Configuration.filled()
         
-        var attributedTitle = AttributedString(title)
-        attributedTitle.font = UIFont(name: "IBMPlexSans-SemiBold", size: 14)
-        attributedTitle.foregroundColor = .white
+        let ns = AttributedTextBuilder.make(title,
+                                            font: FontBook.semiBold(size: 14),
+                                            color: .white,
+                                            kern: Int(-0.3))
+        let swiftAttr = AttributedString(ns)
         
-        config.attributedTitle = attributedTitle
+        config.attributedTitle = swiftAttr
         
         //configurations of the button: BG, FG
         config.baseBackgroundColor = .lightBlue

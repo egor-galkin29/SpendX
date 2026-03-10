@@ -25,7 +25,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
-        l.font = UIFont(name: "IBMPlexSans-Medium", size: 12)
+        l.font = FontBook.medium(size: 12)
         l.textColor = .categoryGrey
         l.textAlignment = .left
         return l
@@ -34,7 +34,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     private let amountLabel: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
-        l.font = UIFont(name: "IBMPlexSans-Medium", size: 12)
+        l.font = FontBook.medium(size: 12)
         l.textColor = .categoryGrey
         l.textAlignment = .right
         return l

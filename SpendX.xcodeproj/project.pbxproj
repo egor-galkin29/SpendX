@@ -36,6 +36,13 @@
 			);
 			target = 2FFCEF212F4DE5AC00156DCC /* SpendX */;
 		};
+		2F191BA12F5D215100B10513 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				TransactionModels.swift,
+			);
+			target = 2FFCEF212F4DE5AC00156DCC /* SpendX */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -50,6 +57,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2F191B8E2F5D1D1000B10513 /* Helper */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (2F191B8F2F5D1D2B00B10513 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 2F191B902F5D1D2E00B10513 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Helper; sourceTree = "<group>"; };
+		2F191B9F2F5D214700B10513 /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (2F191BA12F5D215100B10513 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +108,7 @@
 		2FFCEF242F4DE5AC00156DCC /* SpendX */ = {
 			isa = PBXGroup;
 			children = (
+				2F191B9F2F5D214700B10513 /* Model */,
 				2F191B8E2F5D1D1000B10513 /* Helper */,
 				2F8655C32F58A22F00DB1E2A /* VC */,
 				2FFCEF3A2F4E176900156DCC /* Fonts */,
@@ -135,6 +144,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				2F191B8E2F5D1D1000B10513 /* Helper */,
+				2F191B9F2F5D214700B10513 /* Model */,
 			);
 			name = SpendX;
 			productName = SpendX;
