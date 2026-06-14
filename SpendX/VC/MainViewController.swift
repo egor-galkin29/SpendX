@@ -17,7 +17,7 @@ final class MainViewController: UIViewController {
         label.attributedText = AttributedTextBuilder.make("Account name", font: FontBook.bold(size: 24), color: .black, kern: -1)
         return label
     }()
-        
+    
     private lazy var filterStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: filterButtons.all)
         
@@ -33,7 +33,7 @@ final class MainViewController: UIViewController {
         label.attributedText = AttributedTextBuilder.make("18 567 $", font: FontBook.semiBold(size: 32), color: .black, kern: -1)
         return label
     }()
-   
+    
     private lazy var addStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: spendAddButtons.all)
         
@@ -64,7 +64,7 @@ final class MainViewController: UIViewController {
     }()
     
     private lazy var categoryCollectionView: UICollectionView = {
-       let layout = UICollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         //layout.sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
         layout.minimumLineSpacing = 8
@@ -88,6 +88,10 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        spendAddButtons.all.forEach { button in
+            button.addTarget(self, action: #selector(handleSpendAddButtonTap(_:)), for: .touchUpInside)
+        }
         
         segments = [
             (70, .skyBlue),
@@ -202,6 +206,20 @@ final class MainViewController: UIViewController {
             chartView.layer.addSublayer(cap)
         }
     }
+    
+    @objc private func handleSpendAddButtonTap(_ sender: UIButton) {
+        // You can differentiate buttons by tag, accessibilityIdentifier, or comparing instances.
+        if sender === spendAddButtons.add {
+            let popup = SpendingsPopupViewController()
+            popup.modalPresentationStyle = .overFullScreen
+            popup.modalTransitionStyle = .crossDissolve
+            present(popup, animated: true)
+        } else if sender === spendAddButtons.spend {
+            let popup = SpendingsPopupViewController()
+            popup.modalPresentationStyle = .overFullScreen
+            popup.modalTransitionStyle = .crossDissolve
+            present(popup, animated: true)        }
+    }
 }
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -215,11 +233,11 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             //("Fun", "60", "gamecontroller", UIColor(named: "bright_purple"))
         ]
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoriesData.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.reusableID, for: indexPath) as! CategoryCollectionViewCell
         let item = categoriesData[indexPath.item]
@@ -227,7 +245,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         cell.config(category: item.name, amount: item.amount, icon: icon, color: item.color?.withAlphaComponent(0.3))
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Handle selection if needed
     }
