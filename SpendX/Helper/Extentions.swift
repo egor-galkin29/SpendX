@@ -1,8 +1,8 @@
 import UIKit
 import Foundation
+// File for additional extensions to not repeat the code
 
 //MARK: Public fonts methods
-
 enum FontBook {
     static func medium(size: CGFloat) -> UIFont { UIFont(name: "IBMPlexSans-Medium", size: size) ?? .systemFont(ofSize: size, weight: .medium)}
     

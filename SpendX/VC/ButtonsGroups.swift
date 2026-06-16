@@ -1,4 +1,13 @@
+
 import UIKit
+
+//MARK: Factories
+/*
+ This file creates structures, which helps prevent repetiveness of creating simmilar buttons.
+ Each stracture used for different stack of buttons, though i must ackmowledge that only FilterButtons are usable in my app.
+ Every other factory is for visual appearance of the buttons, which i will work in the future.
+ */
+
 
 struct PeriodButtons {
     let week: UIButton
@@ -33,37 +42,7 @@ struct PeriodButtons {
     }
 }
 
-
-struct SpendAddButtons {
-    let add: UIButton
-    let spend: UIButton
-    
-    init() {
-        self.add = SpendAddButtons.makeUIButtonSpendAdd(imageName: "plus")
-        self.spend = SpendAddButtons.makeUIButtonSpendAdd(imageName: "minus")
-    }
-    
-    var all: [UIButton] { [add, spend] }
-    
-    private static func makeUIButtonSpendAdd(imageName: String) -> UIButton {
-        var config = UIButton.Configuration.filled()
-        
-        config.baseBackgroundColor = .lightLightGrey
-        config.baseForegroundColor = .black
-        
-        config.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
-        
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 14, weight: .bold)
-        config.image = UIImage(systemName: imageName, withConfiguration:  imageConfig)
-        
-        let button = UIButton(configuration: config)
-        button.layer.cornerRadius = 17
-        button.clipsToBounds = true
-        
-        return button
-    }
-}
-
+//MARK: Filter buttons Factory (only one used)
 struct FilterButtons {
     let calendar: UIButton
     let currency: UIButton
@@ -75,8 +54,10 @@ struct FilterButtons {
         self.type = FilterButtons.makeUIButtonFilter("Spendings")
     }
     
+    // List containing all buttons; helps add all of them together to the stack
     var all: [UIButton] { [calendar, currency, type] }
     
+    // Function which sets up buttons
     private static func makeUIButtonFilter(_ title: String) -> UIButton {
         var config = UIButton.Configuration.filled()
         
@@ -92,6 +73,7 @@ struct FilterButtons {
         config.baseBackgroundColor = .lightBlue
         config.baseForegroundColor = .white
         
+        // Paddings in the buttons 
         config.contentInsets = NSDirectionalEdgeInsets(top: 3.5,
                                                        leading: 13,
                                                        bottom: 3.5,

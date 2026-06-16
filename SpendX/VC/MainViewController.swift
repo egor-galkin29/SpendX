@@ -1,15 +1,22 @@
 import UIKit
 
+//MARK: Main class (holds all visual modals)
+
 final class MainViewController: UIViewController {
+    
     //MARK: Private Properties
     
+    // Attribute for the circle
     private var segments: [(value: CGFloat, color: UIColor)] = []
     
+    // Buttons created in the factory (see file ButtonsGroups)
     private let periodButtons = PeriodButtons()
     private let filterButtons = FilterButtons()
-    private let spendAddButtons = SpendAddButtons()
     
-    //MARK: UIView
+    // File which connects backend with frontend of app (see foulder ViewModel
+    private var viewModel = TransactionViewModel()
+
+    //MARK: UIView (visual models)
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -18,30 +25,54 @@ final class MainViewController: UIViewController {
         return label
     }()
     
+    // Stak hold multiple similar buttons which were created in the factory (ButtonsGroups file)
     private lazy var filterStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: filterButtons.all)
-        
         stack.axis = .horizontal
         stack.spacing = 14
         stack.alignment = .center
         
         return stack
+        
+        //adds a hidden list which appears when button is pressed
+        filterButtons.currency.menu = UIMenu(children: currencies.map { name, sign, rate in
+            UIAction(title: "\(sign) \(name) - \(rate)") { [weak self] _ in
+                self?.viewModel.selectedCurrency = (name, sign, rate)
+                self?.updateAmount()
+            }
+        })
+        filterButtons.currency.showsMenuAsPrimaryAction = true
+        
+        filterButtons.type.menu = UIMenu(children: [])
+        filterButtons.type.showsMenuAsPrimaryAction = true
     }()
     
     private let amountLabel: UILabel = {
         let label = UILabel()
-        label.attributedText = AttributedTextBuilder.make("18 567 $", font: FontBook.semiBold(size: 32), color: .black, kern: -1)
+        
+        //AttributedTextBuilder is a custom extension for label, which helps set up text (see file Extentions)
+        
+        label.attributedText = AttributedTextBuilder.make("0 $", font: FontBook.semiBold(size: 32), color: .black, kern: -1)
         return label
     }()
     
-    private lazy var addStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: spendAddButtons.all)
+    private let addExpenceButton: UIButton = {
+       let button = UIButton()
         
-        stack.axis = .horizontal
-        stack.spacing = 10
-        stack.alignment = .center
+        //config is like a font for the text, helps change the size of the system images
         
-        return stack
+        let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
+        let image = UIImage(systemName: "plus", withConfiguration: config)
+        button.setImage(image, for: .normal)
+        button.tintColor = .black
+        button.backgroundColor = .lightLightGrey
+        button.layer.cornerRadius = 20
+        button.layer.masksToBounds = true
+        
+        //adds action to the button; uses special type of function (a.k.a selector)
+        
+        button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        return button
     }()
     
     private let spendingsLabel: UILabel = {
@@ -50,9 +81,16 @@ final class MainViewController: UIViewController {
         return label
     }()
     
-    //adds a view for the circle graph
+    /* chartView
+     adds a view for the circle graph
+     
+     Currently circle isn't working as intented, because i don't know how to work with it.
+     It was added (with the help of AI) as only visual (only for now) part to be able to work on everythig else
+     */
+    
     private let chartView = UIView()
     
+    // contains "week", "month", "year" buttons, which were created through factory again
     private lazy var periodStackView: UIStackView = {
         let stack = UIStackView(arrangedSubviews: periodButtons.all)
         
@@ -63,6 +101,10 @@ final class MainViewController: UIViewController {
         return stack
     }()
     
+    /* CollectionView
+     Was added on my own time, before the final project was annaunced.
+     Would be just a visual part due to the fact that it takes substential time and effort for me to work with it.
+     */
     private lazy var categoryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -85,23 +127,30 @@ final class MainViewController: UIViewController {
     
     //MARK: Override Methods
     
+    // This function activates as soon as the app opens up; in general, starts all the application
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        spendAddButtons.all.forEach { button in
-            button.addTarget(self, action: #selector(handleSpendAddButtonTap(_:)), for: .touchUpInside)
-        }
+        // loads the transactions data from the phone's memory
+        viewModel.load()
+        viewModel.loadCurrency()
         
+        // Updates the AmountLabel text
+        updateAmount()
+        
+        // Circle attribute
         segments = [
             (70, .skyBlue),
             (19, .brightPurple),
             (11, .brightGreen)
         ]
         
+        // Adds all UI elements to the screen, sets their possitions, etc.
         setupView()
     }
     
+    // Something for the circle (again, don't know how it works due to use of Ai)
     override func viewDidLayoutSubviews() {
         super .viewDidLayoutSubviews()
         
@@ -113,11 +162,14 @@ final class MainViewController: UIViewController {
     //MARK: Private Methods
     
     private func setupView() {
-        [titleLabel, filterStackView, amountLabel, addStackView, spendingsLabel, chartView, periodStackView, categoryCollectionView].forEach {
+        
+        // Adds view to the screen
+        [titleLabel, filterStackView, amountLabel, addExpenceButton, spendingsLabel, chartView, periodStackView, categoryCollectionView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
         
+        // Sets up the possiton for each element of the screen
         let guide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -129,8 +181,10 @@ final class MainViewController: UIViewController {
             amountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             amountLabel.topAnchor.constraint(equalTo: filterStackView.bottomAnchor, constant: 25),
             
-            addStackView.centerYAnchor.constraint(equalTo: amountLabel.centerYAnchor),
-            addStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            addExpenceButton.centerYAnchor.constraint(equalTo: amountLabel.centerYAnchor),
+            addExpenceButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            addExpenceButton.heightAnchor.constraint(equalToConstant: 40),
+            addExpenceButton.widthAnchor.constraint(equalToConstant: 40),
             
             spendingsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             spendingsLabel.topAnchor.constraint(equalTo: amountLabel.bottomAnchor),
@@ -207,21 +261,30 @@ final class MainViewController: UIViewController {
         }
     }
     
-    @objc private func handleSpendAddButtonTap(_ sender: UIButton) {
-        // You can differentiate buttons by tag, accessibilityIdentifier, or comparing instances.
-        if sender === spendAddButtons.add {
-            let popup = SpendingsPopupViewController()
-            popup.modalPresentationStyle = .overFullScreen
-            popup.modalTransitionStyle = .crossDissolve
-            present(popup, animated: true)
-        } else if sender === spendAddButtons.spend {
-            let popup = SpendingsPopupViewController()
-            popup.modalPresentationStyle = .overFullScreen
-            popup.modalTransitionStyle = .crossDissolve
-            present(popup, animated: true)        }
+    // Updates the Amount label text on the screen
+    private func updateAmount() {
+        amountLabel.text = String(format: "%.2f", viewModel.totalAmount) + " \(viewModel.selectedCurrency.1)"
+    }
+    
+    // Button function: opens another window (the one where user add new transaction)
+    @objc func addButtonTapped() {
+        let popup = SpendingsPopupViewController()
+        popup.transactionViewModel = viewModel
+        popup.delegate = self
+        popup.modalPresentationStyle = .overFullScreen
+        popup.modalTransitionStyle = .crossDissolve
+        present(popup, animated: true)
     }
 }
 
+// extension for the delegation of changing the Amount Label
+extension MainViewController: SpendingsPopupDelegate {
+    func didSaveTransactiob() {
+        updateAmount()
+    }
+}
+
+// Extension for the CollectionView (again only use to just put it on the screen)
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     private var categoriesData: [(name: String, amount: String, symbol: String, color: UIColor?)] {
         [

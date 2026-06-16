@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F42465A2FD8473A00B52805 /* SpendingsPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4246592FD8471A00B52805 /* SpendingsPopupViewController.swift */; };
-		2F8655C52F58A24D00DB1E2A /* ButtonsGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8655C42F58A24300DB1E2A /* ButtonsGroups.swift */; };
-		2FE425B52F5924820048BEFD /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE425B42F5924710048BEFD /* CategoryCollectionViewCell.swift */; };
-		2FFCEF2A2F4DE5AC00156DCC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFCEF292F4DE5AC00156DCC /* MainViewController.swift */; };
 		2FFCEF3C2F4E17E400156DCC /* IBMPlexSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FFCEF3B2F4E17E400156DCC /* IBMPlexSans-Bold.ttf */; };
 		2FFCEF402F4E180D00156DCC /* IBMPlexSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FFCEF3D2F4E180D00156DCC /* IBMPlexSans-Medium.ttf */; };
 		2FFCEF412F4E180D00156DCC /* IBMPlexSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FFCEF3E2F4E180D00156DCC /* IBMPlexSans-SemiBold.ttf */; };
@@ -18,11 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2F4246592FD8471A00B52805 /* SpendingsPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingsPopupViewController.swift; sourceTree = "<group>"; };
-		2F8655C42F58A24300DB1E2A /* ButtonsGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsGroups.swift; sourceTree = "<group>"; };
-		2FE425B42F5924710048BEFD /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		2FFCEF222F4DE5AC00156DCC /* SpendX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpendX.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2FFCEF292F4DE5AC00156DCC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2FFCEF3B2F4E17E400156DCC /* IBMPlexSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Bold.ttf"; sourceTree = "<group>"; };
 		2FFCEF3D2F4E180D00156DCC /* IBMPlexSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Medium.ttf"; sourceTree = "<group>"; };
 		2FFCEF3E2F4E180D00156DCC /* IBMPlexSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -35,13 +27,6 @@
 			membershipExceptions = (
 				/Localized/LaunchScreen.storyboard,
 				Info.plist,
-			);
-			target = 2FFCEF212F4DE5AC00156DCC /* SpendX */;
-		};
-		2F191BA12F5D215100B10513 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				TransactionModels.swift,
 			);
 			target = 2FFCEF212F4DE5AC00156DCC /* SpendX */;
 		};
@@ -59,7 +44,9 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2F191B8E2F5D1D1000B10513 /* Helper */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (2F191B8F2F5D1D2B00B10513 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 2F191B902F5D1D2E00B10513 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Helper; sourceTree = "<group>"; };
-		2F191B9F2F5D214700B10513 /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (2F191BA12F5D215100B10513 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
+		2F191B9F2F5D214700B10513 /* Model */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Model; sourceTree = "<group>"; };
+		2F92EE9D2FDF8C6F0041E0CE /* VC */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = VC; sourceTree = "<group>"; };
+		2F92EEA22FDF8C800041E0CE /* ViewModel */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModel; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,25 +60,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F8655C32F58A22F00DB1E2A /* VC */ = {
-			isa = PBXGroup;
-			children = (
-				2FE425B32F5924630048BEFD /* MainViewCells */,
-				2F8655C42F58A24300DB1E2A /* ButtonsGroups.swift */,
-				2FFCEF292F4DE5AC00156DCC /* MainViewController.swift */,
-				2F4246592FD8471A00B52805 /* SpendingsPopupViewController.swift */,
-			);
-			path = VC;
-			sourceTree = "<group>";
-		};
-		2FE425B32F5924630048BEFD /* MainViewCells */ = {
-			isa = PBXGroup;
-			children = (
-				2FE425B42F5924710048BEFD /* CategoryCollectionViewCell.swift */,
-			);
-			path = MainViewCells;
-			sourceTree = "<group>";
-		};
 		2FFCEF192F4DE5AC00156DCC = {
 			isa = PBXGroup;
 			children = (
@@ -111,9 +79,10 @@
 		2FFCEF242F4DE5AC00156DCC /* SpendX */ = {
 			isa = PBXGroup;
 			children = (
+				2F92EEA22FDF8C800041E0CE /* ViewModel */,
 				2F191B9F2F5D214700B10513 /* Model */,
 				2F191B8E2F5D1D1000B10513 /* Helper */,
-				2F8655C32F58A22F00DB1E2A /* VC */,
+				2F92EE9D2FDF8C6F0041E0CE /* VC */,
 				2FFCEF3A2F4E176900156DCC /* Fonts */,
 			);
 			path = SpendX;
@@ -148,6 +117,8 @@
 			fileSystemSynchronizedGroups = (
 				2F191B8E2F5D1D1000B10513 /* Helper */,
 				2F191B9F2F5D214700B10513 /* Model */,
+				2F92EE9D2FDF8C6F0041E0CE /* VC */,
+				2F92EEA22FDF8C800041E0CE /* ViewModel */,
 			);
 			name = SpendX;
 			productName = SpendX;
@@ -206,10 +177,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F8655C52F58A24D00DB1E2A /* ButtonsGroups.swift in Sources */,
-				2FFCEF2A2F4DE5AC00156DCC /* MainViewController.swift in Sources */,
-				2FE425B52F5924820048BEFD /* CategoryCollectionViewCell.swift in Sources */,
-				2F42465A2FD8473A00B52805 /* SpendingsPopupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

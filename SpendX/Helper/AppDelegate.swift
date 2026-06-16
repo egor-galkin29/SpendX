@@ -1,4 +1,5 @@
 import UIKit
+//MARK: this file starts app (it's created automaticaly for any app)
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

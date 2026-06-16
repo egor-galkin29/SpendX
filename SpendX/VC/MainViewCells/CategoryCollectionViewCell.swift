@@ -1,4 +1,7 @@
+//This file is just for visuals, thus will not contain no explanations from me
 import UIKit
+
+//MARK: Custom cell for CollectionView
 
 final class CategoryCollectionViewCell: UICollectionViewCell {
     static let reusableID = "CategoryCellID"

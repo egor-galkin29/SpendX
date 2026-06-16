@@ -1,4 +1,5 @@
 import UIKit
+//MARK: this file starts app (created automaticaly)
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
