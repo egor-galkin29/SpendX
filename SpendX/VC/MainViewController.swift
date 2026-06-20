@@ -27,13 +27,6 @@ final class MainViewController: UIViewController {
     
     // Stak hold multiple similar buttons which were created in the factory (ButtonsGroups file)
     private lazy var filterStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: filterButtons.all)
-        stack.axis = .horizontal
-        stack.spacing = 14
-        stack.alignment = .center
-        
-        return stack
-        
         //adds a hidden list which appears when button is pressed
         filterButtons.currency.menu = UIMenu(children: currencies.map { name, sign, rate in
             UIAction(title: "\(sign) \(name) - \(rate)") { [weak self] _ in
@@ -45,6 +38,13 @@ final class MainViewController: UIViewController {
         
         filterButtons.type.menu = UIMenu(children: [])
         filterButtons.type.showsMenuAsPrimaryAction = true
+        
+        let stack = UIStackView(arrangedSubviews: filterButtons.all)
+        stack.axis = .horizontal
+        stack.spacing = 14
+        stack.alignment = .center
+        
+        return stack
     }()
     
     private let amountLabel: UILabel = {
